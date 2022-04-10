@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/adurhmn/react-find-movie.git/static/css/main.368e15ef.css",
+    "main.js": "/adurhmn/react-find-movie.git/static/js/main.dd9b73b2.js",
+    "index.html": "/adurhmn/react-find-movie.git/index.html",
+    "main.368e15ef.css.map": "/adurhmn/react-find-movie.git/static/css/main.368e15ef.css.map",
+    "main.dd9b73b2.js.map": "/adurhmn/react-find-movie.git/static/js/main.dd9b73b2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.368e15ef.css",
+    "static/js/main.dd9b73b2.js"
+  ]
+}
