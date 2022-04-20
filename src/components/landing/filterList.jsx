@@ -6,8 +6,9 @@ class FilterList extends Component {
       .querySelector(".drop-down-checklist__list")
       .classList.toggle("visible");
   }
+
   render() {
-    if (!this.props.visible) return null;
+    if (!this.props.filterVisiblity) return null;
 
     return (
       <ul className="filter-list">
@@ -17,6 +18,7 @@ class FilterList extends Component {
             <span
               className="input drop-down-checklist__toggler"
               onClick={this.genreToggleHandler}
+              q
             >
               Select Genre &#8645;
             </span>
@@ -26,6 +28,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="action"
+                  checked={this.props.filterData.genre.includes("action")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Action
@@ -35,6 +38,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="adventure"
+                  checked={this.props.filterData.genre.includes("adventure")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Adventure
@@ -44,6 +48,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="comedy"
+                  checked={this.props.filterData.genre.includes("comedy")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Comedy
@@ -53,6 +58,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="crime"
+                  checked={this.props.filterData.genre.includes("crime")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Crime
@@ -62,6 +68,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="drama"
+                  checked={this.props.filterData.genre.includes("drama")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Drama
@@ -71,6 +78,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="family"
+                  checked={this.props.filterData.genre.includes("family")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Family
@@ -80,6 +88,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="fantasy"
+                  checked={this.props.filterData.genre.includes("fantasy")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Fantasy
@@ -89,6 +98,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="horror"
+                  checked={this.props.filterData.genre.includes("horror")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Horror
@@ -98,6 +108,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="mystery"
+                  checked={this.props.filterData.genre.includes("mystery")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Mystery
@@ -107,6 +118,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="romance"
+                  checked={this.props.filterData.genre.includes("romance")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Romance
@@ -116,6 +128,7 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="sci_fi"
+                  checked={this.props.filterData.genre.includes("sci_fi")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Sci-Fi
@@ -125,33 +138,13 @@ class FilterList extends Component {
                   type="checkbox"
                   name="genre"
                   value="thriller"
+                  checked={this.props.filterData.genre.includes("thriller")}
                   onChange={(e) => this.props.filterChangeHandler(e)}
                 />
                 &nbsp;Thriller
               </li>
             </ul>
           </div>
-          {/* <select
-            className="input"
-            name="genre"
-            onChange={(e) => this.props.filterChangeHandler(e)}
-          >
-            <option value="" selected disabled hidden>
-              &nbsp;
-            </option>
-            <option value="action">Action</option>
-            <option value="adventure">Adventure</option>
-            <option value="comedy">Comedy</option>
-            <option value="crime">Crime</option>
-            <option value="drama">Drama</option>
-            <option value="family">Family</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="horror">Horror</option>
-            <option value="mystery">Mystery</option>
-            <option value="romance">Romance</option>
-            <option value="sci_fi">Sci-Fi</option>
-            <option value="thriller">Thriller</option>
-          </select> */}
         </li>
         <li className="filter-list-item">
           <label>
@@ -163,6 +156,7 @@ class FilterList extends Component {
             className="input"
             type="date"
             name="from-date"
+            value={this.props.filterData.date[0]}
             onChange={(e) => this.props.filterChangeHandler(e)}
           />
         </li>
@@ -176,6 +170,7 @@ class FilterList extends Component {
             className="input"
             type="date"
             name="to-date"
+            value={this.props.filterData.date[1]}
             onChange={(e) => this.props.filterChangeHandler(e)}
           />
         </li>
@@ -184,12 +179,10 @@ class FilterList extends Component {
           <select
             className="input"
             name="language"
-            defaultValue="placeHolder"
+            value={this.props.filterData.language}
             onChange={(e) => this.props.filterChangeHandler(e)}
           >
-            <option value="placeHolder" disabled hidden>
-              Choose Language
-            </option>
+            <option value="any">--all--</option>
             <option value="ab">Abkhazian</option>
             <option value="aa">Afar</option>
             <option value="af">Afrikaans</option>
@@ -338,11 +331,17 @@ class FilterList extends Component {
             className="input"
             type="number"
             min="1"
-            defaultValue="20"
+            defaultValue={this.props.filterData.count}
             name="count"
             onChange={(e) => this.props.filterChangeHandler(e)}
           />
         </li>
+        <span
+          className="filter-reset-btn"
+          onClick={this.props.filterResetHandler}
+        >
+          Reset All
+        </span>
       </ul>
     );
   }

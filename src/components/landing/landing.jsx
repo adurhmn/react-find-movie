@@ -8,15 +8,17 @@ class Landing extends Component {
     super(props);
     this.findMovieHandler = this.findMovieHandler.bind(this);
     this.filterChangeHandler = this.filterChangeHandler.bind(this);
+    this.filterVisiblityHandler = this.filterVisiblityHandler.bind(this);
     this.filterResetHandler = this.filterResetHandler.bind(this);
     this.state = {
       genre: [],
       date: ["", ""],
-      language: null,
+      language: "any",
       movieData: null,
       count: 20,
       loading: false,
       disableSearch: false,
+      filterVisiblity: false,
     };
   }
 
@@ -38,7 +40,8 @@ class Landing extends Component {
       (url += "&release_date=" + this.state.date[0] + "," + this.state.date[1]);
 
     //Language
-    this.state.language && (url += "&languages=" + this.state.language);
+    this.state.language !== "any" &&
+      (url += "&languages=" + this.state.language);
 
     //Count
     this.state.count && (url += "&count=" + Math.abs(this.state.count));
@@ -108,10 +111,18 @@ class Landing extends Component {
     this.setState({
       genre: [],
       date: ["", ""],
-      language: null,
+      language: "any",
       count: 20,
     });
     // console.log("filter reset succesfull");
+  }
+
+  filterVisiblityHandler(e) {
+    if (e === "forceClose") this.setState({ filterVisiblity: false });
+    else
+      this.setState((prevState) => {
+        return { filterVisiblity: !prevState.filterVisiblity };
+      });
   }
 
   render() {
@@ -120,11 +131,17 @@ class Landing extends Component {
         <div className="landing">
           <span className="logo">Movie Stack</span>
           <Filter
+            filterVisiblity={this.state.filterVisiblity}
+            filterVisiblityHandler={this.filterVisiblityHandler}
             filterChangeHandler={this.filterChangeHandler}
+            filterData={this.state}
             filterResetHandler={this.filterResetHandler}
           />
           <SearchBar
-            clickHandler={(name) => this.findMovieHandler(name)}
+            clickHandler={(name) => {
+              this.filterVisiblityHandler("forceClose");
+              this.findMovieHandler(name);
+            }}
             disabled={this.state.disableSearch}
           />
         </div>
