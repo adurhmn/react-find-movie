@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import Landing from "./components/landing/landing";
+import Landing from "./components/landing/Landing";
 
 class App extends Component {
-  state = {};
   render() {
     return <Landing />;
   }

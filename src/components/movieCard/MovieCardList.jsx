@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import MovieCard from "./movieCard";
-import Loading from "../ui/loading";
+import MovieCard from "./MovieCard";
+import Loading from "../ui/Loading";
 
-class movieCardList extends Component {
+class MovieCardList extends Component {
   render() {
     if (this.props.loading) return <Loading />;
 
@@ -29,4 +29,4 @@ class movieCardList extends Component {
   }
 }
 
-export default movieCardList;
+export default MovieCardList;
